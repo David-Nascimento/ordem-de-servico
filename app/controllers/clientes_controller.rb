@@ -1,43 +1,35 @@
 class ClientesController < ApplicationController
-  before_action :set_cliente, only: [:show, :edit, :update, :destroy]
+  before_action :set_cliente, only: [:show, :update, :destroy]
+  respond_to :json, :xml
 
   def index
     @clientes = Cliente.all
+    respond_with @clientes
   end
-
-  def new
-    @clientes = Clinte.new
-  end
-
   def create
     @cliente = Cliente.new(cliente_params)
 
     if @cliente.save
-      redirect_to clientes_path, notice: "Cliente criado com sucesso!"
+      respond_with @cliente, status: :created
     else
-      render :new
+      respond_with @cliente.errors, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
-
   def update
-    @cliente = Cliente.find(params[:id])
-
     if @cliente.update(cliente_params)
-      redirect_to clientes_path, notice: "Cliente atualizado com sucesso!"
+      respond_with @cliente
     else
-      render :edit
+      respond_with @cliente.errors, status: :unprocessable_entity
     end
   end
 
   def show
+    respond_with @cliente
   end
-
   def destroy
     @cliente.destroy
-    redirect_to clientes_path, notice: "Cliente excluido com sucesso!"
+    head :no_content
   end
 
   private

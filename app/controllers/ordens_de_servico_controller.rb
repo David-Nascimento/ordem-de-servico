@@ -1,41 +1,35 @@
 class OrdensDeServicoController < ApplicationController
-  before_action :set_orden_de_servico, only: [:show, :edit, :update, :destroy]
+  before_action :set_orden_de_servico, only: [:show, :update, :destroy]
+  respond_to :json, :xml
 
   def index
     @ods = OrdemDeServico.all
   end
 
-  def new
-    @ods = OrdemDeServico.new
-  end
-
   def create
     @ods = OrdemDeServico.new(ordemDeServico_params)
     if @ods.save
-      redirect_to ordens_de_servico_path, notice: "Ordem de serviço cadastrada!"
+      respond_with @ods, status: :created
     else
-      render :new
+      respond_with @ods.errors, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
-
   def update
-    @ods = OrdemDeServico.find(ordenDeServico_params)
-    if @ods.update
-      redirect_to ordens_de_servico_path, notice: "Ordem de serviço atualizada!"
+    if @ods.update(cliente_params)
+      respond_with @ods
     else
-      render :edit
+      respond_with @ods.errors, status: :unprocessable_entity
     end
   end
 
   def show
+    respond_with @ods
   end
 
   def destroy
     @ods.destroy
-    redirect_to ordem_de_servico_path, notice: "Ordem de serviço excluida!"
+    head :no_content
   end
 
   private

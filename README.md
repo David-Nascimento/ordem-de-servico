@@ -36,6 +36,8 @@ A seguir, são listadas todas as rotas disponíveis na aplicação:
 | PUT    | /clientes/:id                    | atualiza um cliente específico             |
 | DELETE | /clientes/:id                    | exclui um cliente específico               |
 
+**Observação**: as rotas estão configuradas para retornar o formato **.json** por padrão. Para retornar o formato **.xml**, adicione a extensão .xml no final da URL. Por exemplo: **/ordens_de_servico/1.xml**
+
 ## Contribuindo
 
 Se você deseja contribuir para o projeto, siga as instruções abaixo:

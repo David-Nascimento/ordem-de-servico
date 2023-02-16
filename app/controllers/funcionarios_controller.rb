@@ -1,41 +1,37 @@
 class FuncionariosController < ApplicationController
-  before_action :set_funcionario, only: [:show, :edit, :update, :destroy]
+  before_action :set_funcionario, only: [:show, :update, :destroy]
+  respond_to :json, :xml
 
   def index
     @funcionarios = Funcionario.all
-  end
-
-  def new
-    @funcionarios = Funcionario.new
+    respond_with @funcionarios
   end
 
   def create
     @funcionarios = Funcionario.new(funcionario_params)
     if @funcionarios.save
-      redirect_to funcionarios_path, notice: "Funcionario criado com sucesso!"
+      respond_with @funcionarios, status: :create
     else
-      render :new
+      respond_with @funcionarios, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
-
   def update
-    @funcionarios = Funcionario.find(params[:id])
-    if @funcionarios.update(funcionario_params)
-      redirect_to funcionarios_path, notice: "Funcionario atualizado com sucesso!"
+    @funcionarios = Funcionario.update(funcionario_params)
+    if @funcionarios.save
+      respond_with @funcionarios, status: :create
     else
-      render :edit
+      respond_with @funcionarios, status: :unprocessable_entity
     end
   end
 
   def show
+    respond_with @funcionarios
   end
 
   def destroy
     @funcionarios.destroy
-    redirect_to funcionario_path, notice: "Funcionario excluido com sucesso!"
+    head :no_content
   end
 
   private

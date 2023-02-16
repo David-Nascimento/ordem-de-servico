@@ -15,5 +15,14 @@ module GerenciamentoDeOrdemDeServico
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+      g.template_engine :erb
+      g.test_framework :test_unit, fixture: false
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
+      g.api true, default: :json  # Adicione esta linha
+    end
   end
 end

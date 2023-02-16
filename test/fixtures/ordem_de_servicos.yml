@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numero: MyString
+  descricao: MyText
+  data_solicitacao: 2023-02-16
+  previsao_conclusao: 2023-02-16
+
+two:
+  numero: MyString
+  descricao: MyText
+  data_solicitacao: 2023-02-16
+  previsao_conclusao: 2023-02-16
